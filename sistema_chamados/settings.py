@@ -75,10 +75,15 @@ WSGI_APPLICATION = 'sistema_chamados.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'escravinho',
+        'USER': 'namem',
+        'PASSWORD': '96462191',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
@@ -122,7 +127,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = '/accounts/login/'
+
 LOGIN_REDIRECT_URL = '/chamados/listar/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+CSRF_FAILURE_VIEW = 'django.views.csrf.csrf_failure'
+
 

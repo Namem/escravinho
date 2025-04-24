@@ -22,7 +22,13 @@
     {% if chamado.atendido_por %}
         <p><strong>Atendido por:</strong> {{ chamado.atendido_por.username }}</p>
     {% endif %}
-
+    
+    {% if chamado.status == 'aberto' and chamado.atendido_por == None and eh_analista %}
+    <form method="post" action="{% url 'atribuir_chamado' chamado.id %}">
+        {% csrf_token %}
+        <button type="submit">Atribuir a mim</button>
+    </form>
+    {% endif %}
     
     {% if chamado.status != 'fechado' %}
     <div style="margin-top: 20px;">
@@ -37,6 +43,8 @@
     {% else %}
         <p><strong>Este chamado está fechado.</strong></p>
     {% endif %}
+
+
 
 
     

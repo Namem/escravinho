@@ -8,6 +8,8 @@ urlpatterns = [
     path('fechar/<int:chamado_id>/', views.fechar_chamado, name='fechar_chamado'),
     path('editar/<int:chamado_id>/', views.editar_chamado, name='editar_chamado'),
     path('excluir/<int:chamado_id>/', views.excluir_chamado, name='excluir_chamado'),
+    path('atribuir/<int:chamado_id>/', views.atribuir_chamado, name='atribuir_chamado'),
+
 
 
 
