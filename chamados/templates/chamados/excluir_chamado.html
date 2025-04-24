@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excluir Chamado</title>
+</head>
+<body>
+    <h1>Deseja mesmo excluir este chamado?</h1>
+    <p><strong>{{ chamado.titulo }}</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+    </form>
+    <a href="{% url 'detalhar_chamado' chamado.id %}">Cancelar</a>
+</body>
+</html>

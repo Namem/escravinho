@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abrir Chamado</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p>Olá, {{ user.username }} | 
+       <a href="{% url 'lista_chamados' %}">Meus Chamados</a> |
+       <a href="{% url 'abrir_chamado' %}">Abrir Chamado</a> |
+       <a href="{% url 'logout' %}">Sair</a>
+    </p>
+    {% endif %}
+    <hr>
+
+    <h1>Abrir Novo Chamado</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

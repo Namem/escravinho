@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Chamados</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p>
+        Olá, {{ user.username }} |
+        <a href="{% url 'lista_chamados' %}">Chamados</a> |
+        <a href="{% url 'abrir_chamado' %}">Abrir</a> |
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">
+                Sair
+                </button>
+            </form>
+        </p>
+    {% endif %}
+    <hr>
+
+    <hr>
+    <h1>Meus Chamados</h1>
+    
+    <h2>Chamados Abertos</h2>
+    <ul>
+        {% for chamado in chamados_abertos %}
+            <li>
+                <a href="{% url 'detalhar_chamado' chamado.id %}">{{ chamado.titulo }}</a>
+                - {{ chamado.status }}
+            </li>
+        {% empty %}
+            <li>Nenhum chamado aberto.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Chamados Encerrados</h2>
+    <ul>
+        {% for chamado in chamados_fechados %}
+            <li>
+                <a href="{% url 'detalhar_chamado' chamado.id %}">{{ chamado.titulo }}</a>
+                - {{ chamado.status }}
+            </li>
+        {% empty %}
+            <li>Nenhum chamado encerrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

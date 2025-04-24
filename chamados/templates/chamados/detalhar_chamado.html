@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes do Chamado</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p>Olá, {{ user.username }} | 
+       <a href="{% url 'lista_chamados' %}">Meus Chamados</a> |
+       <a href="{% url 'abrir_chamado' %}">Abrir Chamado</a> |
+       <a href="{% url 'logout' %}">Sair</a>
+    </p>
+    {% endif %}
+    <hr>
+
+    <h1>{{ chamado.titulo }}</h1>
+    <p><strong>Setor:</strong> {{ chamado.setor }}</p>
+    <p><strong>Status:</strong> {{ chamado.status }}</p>
+    <p><strong>Data de Abertura:</strong> {{ chamado.data_abertura|date:"d/m/Y H:i" }}</p>
+    <p><strong>Descrição:</strong><br>{{ chamado.descricao }}</p>
+    <p><strong>Aberto por:</strong> {{ chamado.usuario.username }}</p>
+    {% if chamado.atendido_por %}
+        <p><strong>Atendido por:</strong> {{ chamado.atendido_por.username }}</p>
+    {% endif %}
+
+    
+    {% if chamado.status != 'fechado' %}
+    <div style="margin-top: 20px;">
+        <form method="post" action="{% url 'fechar_chamado' chamado.id %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Fechar Chamado</button>
+        </form>
+
+        <a href="{% url 'editar_chamado' chamado.id %}" style="margin-left: 10px;">Editar</a>
+        <a href="{% url 'excluir_chamado' chamado.id %}" style="margin-left: 10px;">Excluir</a>
+    </div>
+    {% else %}
+        <p><strong>Este chamado está fechado.</strong></p>
+    {% endif %}
+
+
+    
+
+
+    <a href="{% url 'lista_chamados' %}">Voltar para lista</a>
+</body>
+</html>
